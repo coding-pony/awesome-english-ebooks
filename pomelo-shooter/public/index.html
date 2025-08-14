@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>射击柚子 | 实时积分排名</title>
+	<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+	<div class="hud">
+		<div class="brand">射击柚子</div>
+		<div class="controls">
+			<label>昵称</label>
+			<input id="nameInput" type="text" maxlength="20" placeholder="输入你的昵称" />
+			<button id="saveName">保存</button>
+		</div>
+		<div class="leaderboard">
+			<h3>积分榜</h3>
+			<ol id="leaderList"></ol>
+		</div>
+	</div>
+	<canvas id="game"></canvas>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/client.js"></script>
+</body>
+</html>
