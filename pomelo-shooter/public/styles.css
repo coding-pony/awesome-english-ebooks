@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; background: #0b1020; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica, Arial, "PingFang SC", "Microsoft Yahei", sans-serif; color: #e6e6e6; }
+
+.hud { position: fixed; top: 8px; left: 8px; right: 8px; display: flex; align-items: center; gap: 16px; z-index: 10; }
+.brand { font-weight: 800; letter-spacing: 2px; color: #ffda6b; text-shadow: 0 2px 8px rgba(255,218,107,0.35); }
+.controls { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); padding: 6px 10px; border-radius: 8px; }
+.controls input { padding: 6px 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; background: #0f152d; color: #e6e6e6; }
+.controls button { padding: 6px 10px; background: #3a6ff7; color: white; border: none; border-radius: 6px; cursor: pointer; }
+.controls button:hover { background: #2d5dd8; }
+
+.leaderboard { margin-left: auto; background: rgba(255,255,255,0.06); padding: 8px 12px; border-radius: 8px; min-width: 220px; }
+.leaderboard h3 { margin: 0 0 6px; font-size: 14px; opacity: 0.85; }
+.leaderboard ol { margin: 0; padding-left: 18px; max-height: 200px; overflow: auto; }
+.leaderboard li { padding: 2px 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+
+#game { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: block; }
