@@ -6,122 +6,116 @@
 <title>保卫萝卜 - 塔防小游戏</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
 body {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  overflow: hidden;
-}
-#game-wrapper {
+  background: #eaf7ea;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
 }
 #top-bar {
-  width: 800px;
+  height: 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  padding: 0 20px;
+  background: linear-gradient(180deg, #43a047, #388e3c);
   color: #fff;
+  box-shadow: 0 2px 8px rgba(56,142,60,0.3);
+  flex-shrink: 0;
+  z-index: 5;
 }
 #top-bar .info-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 16px;
+  gap: 5px;
+  font-size: 15px;
   font-weight: bold;
 }
-#top-bar .info-item .icon { font-size: 22px; }
-#top-bar .info-item .value { color: #ffd700; font-size: 18px; }
-#top-bar .info-item .value.hp { color: #ff6b6b; }
-#top-bar .info-item .value.wave { color: #69db7c; }
-#canvas-container {
+#top-bar .info-item .icon { font-size: 20px; }
+#top-bar .info-item .value { color: #fff9c4; font-size: 17px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+#top-bar .info-item .value.hp { color: #ffcdd2; }
+#top-bar .info-item .value.wave { color: #c8e6c9; }
+#canvas-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  background: #e8f5e9;
 }
 canvas {
   display: block;
   cursor: crosshair;
+  max-width: 100%;
+  max-height: 100%;
+  border-top: 2px solid #a5d6a7;
+  border-bottom: 2px solid #a5d6a7;
 }
 #bottom-panel {
-  width: 800px;
+  height: 62px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  gap: 6px;
+  padding: 0 12px;
+  background: linear-gradient(0deg, #43a047, #4caf50);
+  box-shadow: 0 -2px 8px rgba(56,142,60,0.3);
+  flex-shrink: 0;
+  z-index: 5;
 }
 .tower-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 6px 10px;
-  border: 2px solid rgba(255,255,255,0.2);
+  gap: 1px;
+  padding: 4px 10px;
+  border: 2px solid rgba(255,255,255,0.3);
   border-radius: 10px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.12);
   color: #fff;
   cursor: pointer;
   transition: all 0.2s;
-  min-width: 80px;
+  min-width: 76px;
   user-select: none;
 }
-.tower-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
-.tower-btn.selected { background: rgba(255,200,50,0.2); border-color: #ffd700; box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+.tower-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.6); }
+.tower-btn.selected { background: rgba(255,255,200,0.3); border-color: #fff9c4; box-shadow: 0 0 12px rgba(255,249,196,0.4); }
 .tower-btn.disabled { opacity: 0.4; cursor: not-allowed; }
-.tower-btn .emoji { font-size: 26px; }
+.tower-btn .emoji { font-size: 22px; line-height: 1.2; }
 .tower-btn .name { font-size: 11px; font-weight: bold; }
-.tower-btn .cost { font-size: 11px; color: #ffd700; }
+.tower-btn .cost { font-size: 10px; color: #fff9c4; }
 #btn-area {
   margin-left: auto;
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 .action-btn {
-  padding: 8px 18px;
+  padding: 7px 14px;
   border: none;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
   font-family: inherit;
-}
-#start-btn {
-  background: linear-gradient(135deg, #51cf66, #37b24d);
   color: #fff;
 }
-#start-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(81,207,102,0.4); }
+#start-btn { background: linear-gradient(135deg, #66bb6a, #2e7d32); }
+#start-btn:hover { transform: scale(1.05); box-shadow: 0 3px 10px rgba(46,125,50,0.4); }
 #start-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-#sell-btn {
-  background: linear-gradient(135deg, #ff6b6b, #e03131);
-  color: #fff;
-  display: none;
-}
+#sell-btn { background: linear-gradient(135deg, #ef5350, #c62828); display: none; }
 #sell-btn:hover { transform: scale(1.05); }
-#upgrade-btn {
-  background: linear-gradient(135deg, #4dabf7, #228be6);
-  color: #fff;
-  display: none;
-}
+#upgrade-btn { background: linear-gradient(135deg, #42a5f5, #1565c0); display: none; }
 #upgrade-btn:hover { transform: scale(1.05); }
+#upgrade-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+#speed-btn { background: linear-gradient(135deg, #ab47bc, #7b1fa2); }
 #info-text {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.85);
   font-size: 12px;
   flex-shrink: 0;
-  min-width: 120px;
+  min-width: 100px;
 }
 #overlay {
   position: absolute;
@@ -130,92 +124,100 @@ canvas {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(27,94,32,0.85);
+  backdrop-filter: blur(6px);
   z-index: 10;
-  border-radius: 12px;
 }
 #overlay.hidden { display: none; }
-#overlay h1 { color: #fff; font-size: 36px; margin-bottom: 8px; }
-#overlay h2 { color: #ffd700; font-size: 22px; margin-bottom: 20px; font-weight: normal; }
-#overlay p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 4px; }
+#overlay h1 { color: #fff; font-size: 38px; margin-bottom: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+#overlay h2 { color: #fff9c4; font-size: 22px; margin-bottom: 20px; font-weight: normal; }
+#overlay p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 5px; }
 #overlay .big-btn {
-  margin-top: 20px;
-  padding: 14px 40px;
+  margin-top: 22px;
+  padding: 14px 44px;
   font-size: 20px;
   font-weight: bold;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-family: inherit;
-  background: linear-gradient(135deg, #ffd700, #f59f00);
-  color: #333;
+  background: linear-gradient(135deg, #fff9c4, #fdd835);
+  color: #2e7d32;
   transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
-#overlay .big-btn:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,215,0,0.4); }
-#speed-btn {
-  background: linear-gradient(135deg, #da77f2, #ae3ec9);
-  color: #fff;
-}
+#overlay .big-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(253,216,53,0.5); }
 </style>
 </head>
 <body>
-<div id="game-wrapper">
-  <div id="top-bar">
-    <div class="info-item"><span class="icon">🌊</span><span>波次：</span><span class="value wave" id="wave-text">0 / 15</span></div>
-    <div class="info-item"><span class="icon">💰</span><span>金币：</span><span class="value" id="gold-text">200</span></div>
-    <div class="info-item"><span class="icon">🥕</span><span>萝卜生命：</span><span class="value hp" id="hp-text">20</span></div>
-    <div class="info-item"><span class="icon">🏆</span><span>得分：</span><span class="value" id="score-text">0</span></div>
+<div id="top-bar">
+  <div class="info-item"><span class="icon">🌊</span><span>波次：</span><span class="value wave" id="wave-text">0 / 15</span></div>
+  <div class="info-item"><span class="icon">💰</span><span>金币：</span><span class="value" id="gold-text">200</span></div>
+  <div class="info-item"><span class="icon">🥕</span><span>萝卜生命：</span><span class="value hp" id="hp-text">20</span></div>
+  <div class="info-item"><span class="icon">🏆</span><span>得分：</span><span class="value" id="score-text">0</span></div>
+</div>
+<div id="canvas-area">
+  <canvas id="gameCanvas"></canvas>
+  <div id="overlay">
+    <h1>🥕 保卫萝卜 🥕</h1>
+    <h2>塔防小游戏</h2>
+    <p>在路径两侧放置防御塔，阻止敌人到达萝卜！</p>
+    <p>消灭敌人获得金币，升级塔增强战力</p>
+    <p style="margin-top:12px; color:#fff9c4;">💡 点击空地放置塔 | 点击已有塔可升级/出售</p>
+    <button class="big-btn" id="play-btn" onclick="startGame()">开始游戏</button>
   </div>
-  <div id="canvas-container">
-    <canvas id="gameCanvas" width="800" height="560"></canvas>
-    <div id="overlay">
-      <h1>🥕 保卫萝卜 🥕</h1>
-      <h2>塔防小游戏</h2>
-      <p>在路径两侧放置防御塔，阻止敌人到达萝卜！</p>
-      <p>消灭敌人获得金币，升级塔增强战力</p>
-      <p style="margin-top:12px; color:#ffd700;">💡 点击空地放置塔 | 点击已有塔可升级/出售</p>
-      <button class="big-btn" id="play-btn" onclick="startGame()">开始游戏</button>
-    </div>
+</div>
+<div id="bottom-panel">
+  <div id="info-text">选择炮塔放置</div>
+  <div class="tower-btn" data-tower="0" onclick="selectTower(0)">
+    <span class="emoji">🌿</span><span class="name">豌豆射手</span><span class="cost">💰100</span>
   </div>
-  <div id="bottom-panel">
-    <div id="info-text">选择一个塔放置</div>
-    <div class="tower-btn" data-tower="0" onclick="selectTower(0)">
-      <span class="emoji">🌿</span><span class="name">豌豆射手</span><span class="cost">💰 100</span>
-    </div>
-    <div class="tower-btn" data-tower="1" onclick="selectTower(1)">
-      <span class="emoji">❄️</span><span class="name">冰冻塔</span><span class="cost">💰 150</span>
-    </div>
-    <div class="tower-btn" data-tower="2" onclick="selectTower(2)">
-      <span class="emoji">🚀</span><span class="name">火箭炮</span><span class="cost">💰 200</span>
-    </div>
-    <div class="tower-btn" data-tower="3" onclick="selectTower(3)">
-      <span class="emoji">⚡</span><span class="name">闪电塔</span><span class="cost">💰 250</span>
-    </div>
-    <div class="tower-btn" data-tower="4" onclick="selectTower(4)">
-      <span class="emoji">🔮</span><span class="name">魔法水晶</span><span class="cost">💰 300</span>
-    </div>
-    <div id="btn-area">
-      <button class="action-btn" id="upgrade-btn" onclick="upgradeTower()">升级</button>
-      <button class="action-btn" id="sell-btn" onclick="sellTower()">出售</button>
-      <button class="action-btn" id="speed-btn" onclick="toggleSpeed()">⏩ 1x</button>
-      <button class="action-btn" id="start-btn" onclick="sendNextWave()">发送波次</button>
-    </div>
+  <div class="tower-btn" data-tower="1" onclick="selectTower(1)">
+    <span class="emoji">❄️</span><span class="name">冰冻塔</span><span class="cost">💰150</span>
+  </div>
+  <div class="tower-btn" data-tower="2" onclick="selectTower(2)">
+    <span class="emoji">🚀</span><span class="name">火箭炮</span><span class="cost">💰200</span>
+  </div>
+  <div class="tower-btn" data-tower="3" onclick="selectTower(3)">
+    <span class="emoji">⚡</span><span class="name">闪电塔</span><span class="cost">💰250</span>
+  </div>
+  <div class="tower-btn" data-tower="4" onclick="selectTower(4)">
+    <span class="emoji">🔮</span><span class="name">魔法水晶</span><span class="cost">💰300</span>
+  </div>
+  <div id="btn-area">
+    <button class="action-btn" id="upgrade-btn" onclick="upgradeTower()">升级</button>
+    <button class="action-btn" id="sell-btn" onclick="sellTower()">出售</button>
+    <button class="action-btn" id="speed-btn" onclick="toggleSpeed()">⏩1x</button>
+    <button class="action-btn" id="start-btn" onclick="sendNextWave()">发送波次</button>
   </div>
 </div>
 
 <script>
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const COLS = 20, ROWS = 14, CELL = 40;
-const W = canvas.width, H = canvas.height;
+
+const LOGICAL_COLS = 20, LOGICAL_ROWS = 14, BASE_CELL = 40;
+const LOGICAL_W = LOGICAL_COLS * BASE_CELL;
+const LOGICAL_H = LOGICAL_ROWS * BASE_CELL;
+canvas.width = LOGICAL_W;
+canvas.height = LOGICAL_H;
+const CELL = BASE_CELL, COLS = LOGICAL_COLS, ROWS = LOGICAL_ROWS;
+const W = LOGICAL_W, H = LOGICAL_H;
+
+function canvasMousePos(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) * (canvas.width / rect.width),
+    y: (e.clientY - rect.top) * (canvas.height / rect.height)
+  };
+}
 
 const TOWER_DEFS = [
-  { name:'豌豆射手', cost:100, range:120, damage:15, fireRate:800, color:'#51cf66', projColor:'#69db7c', projSpeed:5, splash:0, slow:0, chain:0 },
-  { name:'冰冻塔',   cost:150, range:110, damage:8,  fireRate:1000,color:'#74c0fc', projColor:'#a5d8ff', projSpeed:4, splash:0, slow:0.5, chain:0 },
-  { name:'火箭炮',   cost:200, range:130, damage:35, fireRate:1500,color:'#ff6b6b', projColor:'#ffa94d', projSpeed:3, splash:50, slow:0, chain:0 },
-  { name:'闪电塔',   cost:250, range:140, damage:20, fireRate:1200,color:'#da77f2', projColor:'#e599f7', projSpeed:8, splash:0, slow:0, chain:3 },
-  { name:'魔法水晶', cost:300, range:150, damage:45, fireRate:1800,color:'#9775fa', projColor:'#b197fc', projSpeed:4, splash:0, slow:0, chain:0 },
+  { name:'豌豆射手', cost:100, range:120, damage:15, fireRate:800, color:'#43a047', projColor:'#81c784', projSpeed:5, splash:0, slow:0, chain:0 },
+  { name:'冰冻塔',   cost:150, range:110, damage:10, fireRate:1000,color:'#039be5', projColor:'#4fc3f7', projSpeed:4, splash:0, slow:0.5, chain:0 },
+  { name:'火箭炮',   cost:200, range:130, damage:35, fireRate:1500,color:'#e53935', projColor:'#ff8a65', projSpeed:3.5, splash:50, slow:0, chain:0 },
+  { name:'闪电塔',   cost:250, range:140, damage:22, fireRate:1200,color:'#8e24aa', projColor:'#ce93d8', projSpeed:8, splash:0, slow:0, chain:3 },
+  { name:'魔法水晶', cost:300, range:150, damage:45, fireRate:1800,color:'#5e35b1', projColor:'#b39ddb', projSpeed:4, splash:0, slow:0, chain:0 },
 ];
 
 const UPGRADE_MULT = { damage: 1.5, range: 1.15, fireRate: 0.85 };
@@ -235,7 +237,6 @@ function buildPathCells() {
     const dx = Math.sign(b.x - a.x), dy = Math.sign(b.y - a.y);
     let cx = a.x, cy = a.y;
     while (cx !== b.x || cy !== b.y) {
-      const key = `${cx},${cy}`;
       if (!PATH_CELLS.find(p => p.x===cx && p.y===cy)) PATH_CELLS.push({x:cx, y:cy});
       cx += dx; cy += dy;
     }
@@ -245,37 +246,22 @@ function buildPathCells() {
 }
 buildPathCells();
 
-const pixelWaypoints = WAYPOINTS.map(w => ({ x: w.x * CELL + CELL/2, y: w.y * CELL + CELL/2 }));
+const pathSet = new Set(PATH_CELLS.map(p => `${p.x},${p.y}`));
+function isPathCell(col, row) { return pathSet.has(`${col},${row}`); }
 
-function isPathCell(col, row) {
-  return PATH_CELLS.some(p => p.x === col && p.y === row);
-}
+const pixelWaypoints = WAYPOINTS.map(w => ({ x: w.x * CELL + CELL/2, y: w.y * CELL + CELL/2 }));
 
 let game = null;
 
 function newGameState() {
   return {
-    gold: 200,
-    hp: 20,
-    score: 0,
-    wave: 0,
-    towers: [],
-    enemies: [],
-    projectiles: [],
-    particles: [],
-    floatingTexts: [],
-    selectedTowerType: -1,
-    selectedTower: null,
-    waveInProgress: false,
-    spawnQueue: [],
-    spawnTimer: 0,
-    gameOver: false,
-    won: false,
-    started: false,
-    speed: 1,
-    lastTime: 0,
-    gameTime: 0,
-    carrotBounce: 0,
+    gold: 200, hp: 20, score: 0, wave: 0,
+    towers: [], enemies: [], projectiles: [], particles: [], floatingTexts: [],
+    placeAnims: [],
+    selectedTowerType: -1, selectedTower: null,
+    waveInProgress: false, spawnQueue: [], spawnTimer: 0,
+    gameOver: false, won: false, started: false,
+    speed: 1, lastTime: 0, gameTime: 0, carrotBounce: 0,
   };
 }
 
@@ -294,6 +280,7 @@ class Tower {
     this.lastFire = 0;
     this.angle = 0;
     this.target = null;
+    this.scale = 0;
   }
   get def() { return TOWER_DEFS[this.type]; }
   get sellValue() {
@@ -301,19 +288,15 @@ class Tower {
     for (let l = 1; l < this.level; l++) total += this.upgradeCost(l);
     return Math.floor(total * 0.6);
   }
-  upgradeCost(lvl) {
-    return Math.floor(this.def.cost * 0.6 * lvl);
-  }
-  get nextUpgradeCost() {
-    if (this.level >= MAX_LEVEL) return Infinity;
-    return this.upgradeCost(this.level);
-  }
+  upgradeCost(lvl) { return Math.floor(this.def.cost * 0.6 * lvl); }
+  get nextUpgradeCost() { return this.level >= MAX_LEVEL ? Infinity : this.upgradeCost(this.level); }
   upgrade() {
     if (this.level >= MAX_LEVEL) return;
     this.level++;
     this.damage = Math.floor(this.def.damage * Math.pow(UPGRADE_MULT.damage, this.level - 1));
     this.range = Math.floor(this.def.range * Math.pow(UPGRADE_MULT.range, this.level - 1));
     this.fireRate = Math.floor(this.def.fireRate * Math.pow(UPGRADE_MULT.fireRate, this.level - 1));
+    this.scale = 0.5;
   }
 }
 
@@ -328,11 +311,11 @@ class Enemy {
     this.alive = true;
     this.reachedEnd = false;
     const defs = {
-      basic:  { hp:80, speed:1.2, radius:10, color:'#69db7c', reward:10, scoreVal:10 },
-      fast:   { hp:50, speed:2.2, radius:8,  color:'#74c0fc', reward:8,  scoreVal:8 },
-      tank:   { hp:250,speed:0.7, radius:14, color:'#ff8787', reward:20, scoreVal:25 },
-      healer: { hp:120,speed:1.0, radius:11, color:'#ffd43b', reward:15, scoreVal:15 },
-      boss:   { hp:800,speed:0.5, radius:18, color:'#e64980', reward:50, scoreVal:100 },
+      basic:  { hp:75, speed:1.2, radius:10, color:'#e57373', reward:10, scoreVal:10 },
+      fast:   { hp:45, speed:2.2, radius:8,  color:'#64b5f6', reward:8,  scoreVal:8 },
+      tank:   { hp:180,speed:0.7, radius:14, color:'#ff8a65', reward:20, scoreVal:25 },
+      healer: { hp:75, speed:1.0, radius:11, color:'#ffd54f', reward:15, scoreVal:15 },
+      boss:   { hp:450,speed:0.5, radius:18, color:'#f06292', reward:50, scoreVal:100 },
     };
     const d = defs[type] || defs.basic;
     this.maxHp = Math.floor(d.hp * hpMult);
@@ -368,14 +351,13 @@ class Particle {
   constructor(x, y, color, vx, vy, life, size) {
     this.x = x; this.y = y; this.color = color;
     this.vx = vx; this.vy = vy;
-    this.life = life; this.maxLife = life;
-    this.size = size;
+    this.life = life; this.maxLife = life; this.size = size;
   }
 }
 
 function generateWave(waveNum) {
   const enemies = [];
-  const hpMult = 1 + (waveNum - 1) * 0.3;
+  const hpMult = 1 + (waveNum - 1) * 0.2;
   if (waveNum <= 3) {
     for (let i = 0; i < 6 + waveNum * 2; i++) enemies.push({ type: 'basic', delay: i * 600 });
   } else if (waveNum <= 5) {
@@ -428,6 +410,7 @@ function findTarget(tower) {
 }
 
 function fireTower(tower, now) {
+  if (tower.scale < 1) return;
   const target = findTarget(tower);
   if (!target) { tower.target = null; return; }
   tower.target = target;
@@ -435,6 +418,14 @@ function fireTower(tower, now) {
   if (now - tower.lastFire >= tower.fireRate) {
     tower.lastFire = now;
     game.projectiles.push(new Projectile(tower.x, tower.y, target, tower));
+  }
+}
+
+function updateTowerAnims(dt) {
+  for (const t of game.towers) {
+    if (t.scale < 1) {
+      t.scale = Math.min(1, t.scale + dt * 0.004);
+    }
   }
 }
 
@@ -484,7 +475,7 @@ function updateProjectiles(dt) {
             if (e.hp <= 0) killEnemy(e);
           }
         }
-        spawnParticles(p.target.x, p.target.y, '#ffa94d', 10, 3, 20, 4);
+        spawnParticles(p.target.x, p.target.y, '#ff8a65', 10, 3, 20, 4);
       }
       if (p.chain > 0) {
         let lastTarget = p.target;
@@ -526,7 +517,7 @@ function killEnemy(enemy) {
   enemy.alive = false;
   game.gold += enemy.reward;
   game.score += enemy.scoreVal;
-  addFloatingText(enemy.x, enemy.y - 10, `+${enemy.reward}💰`, '#ffd700');
+  addFloatingText(enemy.x, enemy.y - 10, `+${enemy.reward}💰`, '#2e7d32');
   spawnParticles(enemy.x, enemy.y, enemy.color, 12, 3, 25, 5);
 }
 
@@ -548,7 +539,15 @@ function updateFloatingTexts(dt) {
   game.floatingTexts = game.floatingTexts.filter(t => t.life > 0);
 }
 
-function updateSpawner(dt, now) {
+function updatePlaceAnims(dt) {
+  for (const a of game.placeAnims) {
+    a.life -= dt * 0.06;
+    a.radius += dt * 0.15;
+  }
+  game.placeAnims = game.placeAnims.filter(a => a.life > 0);
+}
+
+function updateSpawner(dt) {
   if (!game.waveInProgress || game.spawnQueue.length === 0) return;
   game.spawnTimer -= dt;
   if (game.spawnTimer <= 0 && game.spawnQueue.length > 0) {
@@ -567,7 +566,7 @@ function checkWaveComplete() {
     game.waveInProgress = false;
     const bonus = 20 + game.wave * 5;
     game.gold += bonus;
-    addFloatingText(W/2, H/2, `波次完成！+${bonus}💰`, '#ffd700');
+    addFloatingText(W/2, H/2, `波次完成！+${bonus}💰`, '#2e7d32');
     if (game.wave >= TOTAL_WAVES && game.hp > 0) {
       game.won = true;
       game.gameOver = true;
@@ -583,8 +582,8 @@ function handleReachedEnd() {
       game.hp -= (e.type === 'boss' ? 5 : 1);
       e.reachedEnd = false;
       const cp = pixelWaypoints[pixelWaypoints.length-1];
-      spawnParticles(cp.x, cp.y, '#ff6b6b', 8, 3, 20, 4);
-      addFloatingText(cp.x, cp.y - 20, '-❤️', '#ff6b6b');
+      spawnParticles(cp.x, cp.y, '#e53935', 8, 3, 20, 4);
+      addFloatingText(cp.x, cp.y - 20, '-❤️', '#e53935');
     }
   }
   game.enemies = game.enemies.filter(e => e.alive);
@@ -596,62 +595,58 @@ function handleReachedEnd() {
   }
 }
 
+/* ===== DRAWING ===== */
+
 function drawMap() {
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
       const x = c * CELL, y = r * CELL;
       if (isPathCell(c, r)) {
-        ctx.fillStyle = '#e8d5b7';
+        ctx.fillStyle = '#fff3e0';
         ctx.fillRect(x, y, CELL, CELL);
-        ctx.fillStyle = '#dcc8a6';
+        ctx.fillStyle = '#ffe0b2';
         ctx.fillRect(x+1, y+1, CELL-2, CELL-2);
       } else {
-        const shade = ((c + r) % 2 === 0) ? '#4ade80' : '#3fc973';
+        const shade = ((c + r) % 2 === 0) ? '#c8e6c9' : '#a5d6a7';
         ctx.fillStyle = shade;
         ctx.fillRect(x, y, CELL, CELL);
       }
     }
   }
-
-  ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+  ctx.strokeStyle = 'rgba(56,142,60,0.08)';
   ctx.lineWidth = 1;
   for (let r = 0; r <= ROWS; r++) { ctx.beginPath(); ctx.moveTo(0, r*CELL); ctx.lineTo(W, r*CELL); ctx.stroke(); }
   for (let c = 0; c <= COLS; c++) { ctx.beginPath(); ctx.moveTo(c*CELL, 0); ctx.lineTo(c*CELL, H); ctx.stroke(); }
 
-  const carrot = pixelWaypoints[pixelWaypoints.length - 1];
-  game.carrotBounce += 0.05;
-  const bounceY = Math.sin(game.carrotBounce) * 3;
-  ctx.save();
-  ctx.translate(carrot.x, carrot.y + bounceY);
-  ctx.font = '28px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('🥕', 0, 0);
-  ctx.restore();
-
-  const entry = pixelWaypoints[0];
-  ctx.font = '16px serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('🚪', entry.x - 15, entry.y);
-
   for (const d of decorations) {
-    if (game.towers.some(t => t.col === d.col && t.row === d.row)) continue;
+    if (game && game.towers.some(t => t.col === d.col && t.row === d.row)) continue;
     ctx.font = '16px serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.globalAlpha = 0.6;
+    ctx.globalAlpha = 0.5;
     ctx.fillText(d.type, d.col * CELL + CELL/2 + d.offset, d.row * CELL + CELL/2);
     ctx.globalAlpha = 1;
   }
+
+  const carrot = pixelWaypoints[pixelWaypoints.length - 1];
+  if (game) game.carrotBounce += 0.05;
+  const bounceY = Math.sin((game ? game.carrotBounce : 0)) * 3;
+  ctx.font = '28px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🥕', carrot.x, carrot.y + bounceY);
+
+  ctx.font = '18px serif';
+  ctx.fillText('🚪', pixelWaypoints[0].x - 15, pixelWaypoints[0].y);
 }
 
 function drawRangeCircle(x, y, range) {
   ctx.beginPath();
   ctx.arc(x, y, range, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  ctx.fillStyle = 'rgba(76,175,80,0.1)';
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(76,175,80,0.35)';
+  ctx.lineWidth = 1.5;
   ctx.stroke();
 }
 
@@ -663,16 +658,18 @@ function drawTowers() {
     if (isSelected) drawRangeCircle(x, y, t.range);
 
     const baseR = 14 + t.level * 2;
+    const s = easeOutBack(Math.min(1, t.scale));
     ctx.save();
     ctx.translate(x, y);
+    ctx.scale(s, s);
 
     ctx.beginPath();
-    ctx.arc(0, 2, baseR + 2, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx.arc(0, 3, baseR + 2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,0.12)';
     ctx.fill();
 
     const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, baseR);
-    grad.addColorStop(0, lightenColor(def.color, 40));
+    grad.addColorStop(0, lightenColor(def.color, 50));
     grad.addColorStop(1, def.color);
     ctx.beginPath();
     ctx.arc(0, 0, baseR, 0, Math.PI * 2);
@@ -682,12 +679,23 @@ function drawTowers() {
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    if (t.target && t.target.alive) {
+    ctx.beginPath();
+    ctx.arc(-baseR*0.25, -baseR*0.25, baseR*0.35, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.2)';
+    ctx.fill();
+
+    if (t.target && t.target.alive && s >= 1) {
       ctx.rotate(t.angle);
       ctx.fillStyle = darkenColor(def.color, 50);
-      ctx.fillRect(baseR - 4, -3, 10, 6);
+      ctx.beginPath();
+      ctx.moveTo(baseR - 2, -3);
+      ctx.lineTo(baseR + 8, 0);
+      ctx.lineTo(baseR - 2, 3);
+      ctx.closePath();
+      ctx.fill();
       ctx.setTransform(1,0,0,1,0,0);
       ctx.translate(x, y);
+      ctx.scale(s, s);
     }
 
     const icons = ['🌿','❄️','🚀','⚡','🔮'];
@@ -709,13 +717,24 @@ function drawTowers() {
     if (isSelected) {
       ctx.beginPath();
       ctx.arc(0, 0, baseR + 4, 0, Math.PI * 2);
-      ctx.strokeStyle = '#ffd700';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = '#fdd835';
+      ctx.lineWidth = 2.5;
+      ctx.setLineDash([5, 4]);
       ctx.stroke();
       ctx.setLineDash([]);
     }
     ctx.restore();
+  }
+}
+
+function drawPlaceAnims() {
+  for (const a of game.placeAnims) {
+    const alpha = a.life / a.maxLife;
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(76,175,80,${alpha * 0.6})`;
+    ctx.lineWidth = 2 * alpha;
+    ctx.stroke();
   }
 }
 
@@ -728,17 +747,17 @@ function drawEnemies() {
 
     ctx.beginPath();
     ctx.arc(0, 2, e.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
     ctx.fill();
 
     const grad = ctx.createRadialGradient(-2, -2, 1, 0, 0, e.radius);
-    grad.addColorStop(0, lightenColor(e.color, 30));
+    grad.addColorStop(0, lightenColor(e.color, 40));
     grad.addColorStop(1, e.color);
     ctx.beginPath();
     ctx.arc(0, 0, e.radius, 0, Math.PI * 2);
     ctx.fillStyle = grad;
     ctx.fill();
-    ctx.strokeStyle = darkenColor(e.color, 20);
+    ctx.strokeStyle = darkenColor(e.color, 25);
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
@@ -753,27 +772,26 @@ function drawEnemies() {
     if (e.type === 'boss') {
       ctx.font = '14px serif';
       ctx.textAlign = 'center';
-      ctx.fillText('👑', 0, -e.radius - 4);
+      ctx.fillText('👑', 0, -e.radius - 5);
     }
 
     if (e.slowTimer > 0) {
       ctx.beginPath();
       ctx.arc(0, 0, e.radius + 3, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(116,192,252,0.6)';
+      ctx.strokeStyle = 'rgba(3,155,229,0.5)';
       ctx.lineWidth = 2;
       ctx.stroke();
     }
 
     const barW = e.radius * 2 + 4, barH = 4;
     const barX = -barW/2, barY = -e.radius - 10;
-    ctx.fillStyle = 'rgba(0,0,0,0.4)';
-    ctx.fillRect(barX, barY, barW, barH);
-    const hpRatio = e.hp / e.maxHp;
-    ctx.fillStyle = hpRatio > 0.5 ? '#51cf66' : hpRatio > 0.25 ? '#ffd43b' : '#ff6b6b';
-    ctx.fillRect(barX, barY, barW * hpRatio, barH);
-    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
-    ctx.lineWidth = 0.5;
-    ctx.strokeRect(barX, barY, barW, barH);
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    roundRect(ctx, barX, barY, barW, barH, 2);
+    ctx.fill();
+    const hpRatio = Math.max(0, e.hp / e.maxHp);
+    ctx.fillStyle = hpRatio > 0.5 ? '#66bb6a' : hpRatio > 0.25 ? '#fdd835' : '#ef5350';
+    roundRect(ctx, barX, barY, barW * hpRatio, barH, 2);
+    ctx.fill();
 
     ctx.restore();
   }
@@ -784,7 +802,7 @@ function drawProjectiles() {
     if (!p.alive) continue;
     for (let i = 0; i < p.trail.length; i++) {
       const t = p.trail[i];
-      const alpha = (i+1) / p.trail.length * 0.4;
+      const alpha = (i+1) / p.trail.length * 0.35;
       ctx.beginPath();
       ctx.arc(t.x, t.y, p.radius * (i/p.trail.length), 0, Math.PI*2);
       ctx.fillStyle = `rgba(255,255,255,${alpha})`;
@@ -819,8 +837,8 @@ function drawFloatingTexts() {
     ctx.font = 'bold 13px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = t.color;
-    ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+    ctx.lineWidth = 2.5;
     ctx.strokeText(t.text, t.x, t.y);
     ctx.fillText(t.text, t.x, t.y);
   }
@@ -828,15 +846,53 @@ function drawFloatingTexts() {
 }
 
 function drawPlacementPreview(mx, my) {
-  if (game.selectedTowerType < 0 || game.selectedTower) return;
+  if (!game || game.selectedTowerType < 0 || game.selectedTower) return;
   const col = Math.floor(mx / CELL), row = Math.floor(my / CELL);
   if (col < 0 || col >= COLS || row < 0 || row >= ROWS) return;
   const canPlace = !isPathCell(col, row) && !game.towers.some(t => t.col === col && t.row === row);
   const cx = col * CELL + CELL/2, cy = row * CELL + CELL/2;
   const def = TOWER_DEFS[game.selectedTowerType];
-  ctx.fillStyle = canPlace ? 'rgba(81,207,102,0.3)' : 'rgba(255,107,107,0.3)';
-  ctx.fillRect(col*CELL, row*CELL, CELL, CELL);
-  if (canPlace) drawRangeCircle(cx, cy, def.range);
+
+  ctx.fillStyle = canPlace ? 'rgba(76,175,80,0.25)' : 'rgba(229,57,53,0.25)';
+  roundRect(ctx, col*CELL+2, row*CELL+2, CELL-4, CELL-4, 6);
+  ctx.fill();
+  ctx.strokeStyle = canPlace ? 'rgba(76,175,80,0.6)' : 'rgba(229,57,53,0.6)';
+  ctx.lineWidth = 2;
+  roundRect(ctx, col*CELL+2, row*CELL+2, CELL-4, CELL-4, 6);
+  ctx.stroke();
+
+  if (canPlace) {
+    drawRangeCircle(cx, cy, def.range);
+    const icons = ['🌿','❄️','🚀','⚡','🔮'];
+    ctx.globalAlpha = 0.5;
+    ctx.font = '18px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(icons[game.selectedTowerType], cx, cy);
+    ctx.globalAlpha = 1;
+  }
+}
+
+/* ===== HELPERS ===== */
+
+function easeOutBack(t) {
+  const c1 = 1.70158;
+  const c3 = c1 + 1;
+  return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
 }
 
 function lightenColor(hex, amt) {
@@ -850,24 +906,28 @@ function darkenColor(hex, amt) {
   return `rgb(${r},${g},${b})`;
 }
 
-let mouseX = 0, mouseY = 0;
+/* ===== INPUT ===== */
+
+let mouseX = -100, mouseY = -100;
 
 canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
+  const pos = canvasMousePos(e);
+  mouseX = pos.x;
+  mouseY = pos.y;
 });
 
+canvas.addEventListener('mouseleave', () => { mouseX = -100; mouseY = -100; });
+
 canvas.addEventListener('click', e => {
-  if (game.gameOver || !game.started) return;
-  const rect = canvas.getBoundingClientRect();
-  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  if (!game || game.gameOver || !game.started) return;
+  const pos = canvasMousePos(e);
+  const mx = pos.x, my = pos.y;
   const col = Math.floor(mx / CELL), row = Math.floor(my / CELL);
   if (col < 0 || col >= COLS || row < 0 || row >= ROWS) return;
 
   const existingTower = game.towers.find(t => t.col === col && t.row === row);
   if (existingTower) {
-    game.selectedTower = existingTower;
+    game.selectedTower = (game.selectedTower === existingTower) ? null : existingTower;
     game.selectedTowerType = -1;
     document.querySelectorAll('.tower-btn').forEach(b => b.classList.remove('selected'));
     updateTowerUI();
@@ -875,17 +935,22 @@ canvas.addEventListener('click', e => {
   }
 
   if (game.selectedTowerType >= 0) {
-    if (isPathCell(col, row)) return;
+    if (isPathCell(col, row)) {
+      addFloatingText(col*CELL+CELL/2, row*CELL, '不能放在路上!', '#e53935');
+      return;
+    }
     if (game.towers.some(t => t.col === col && t.row === row)) return;
     const cost = TOWER_DEFS[game.selectedTowerType].cost;
     if (game.gold < cost) {
-      addFloatingText(col*CELL+CELL/2, row*CELL, '金币不足!', '#ff6b6b');
+      addFloatingText(col*CELL+CELL/2, row*CELL, '金币不足!', '#e53935');
       return;
     }
     game.gold -= cost;
     const tower = new Tower(col, row, game.selectedTowerType);
     game.towers.push(tower);
-    spawnParticles(tower.x, tower.y, TOWER_DEFS[game.selectedTowerType].color, 8, 2, 20, 3);
+    game.placeAnims.push({ x: tower.x, y: tower.y, radius: 5, life: 30, maxLife: 30 });
+    spawnParticles(tower.x, tower.y, TOWER_DEFS[game.selectedTowerType].color, 12, 3, 25, 4);
+    addFloatingText(tower.x, tower.y - 20, `💰-${cost}`, '#e53935');
     game.selectedTower = null;
     updateTowerUI();
   } else {
@@ -896,6 +961,7 @@ canvas.addEventListener('click', e => {
 
 canvas.addEventListener('contextmenu', e => {
   e.preventDefault();
+  if (!game) return;
   game.selectedTower = null;
   game.selectedTowerType = -1;
   document.querySelectorAll('.tower-btn').forEach(b => b.classList.remove('selected'));
@@ -903,7 +969,7 @@ canvas.addEventListener('contextmenu', e => {
 });
 
 function selectTower(idx) {
-  if (game.gameOver || !game.started) return;
+  if (!game || game.gameOver || !game.started) return;
   game.selectedTower = null;
   if (game.selectedTowerType === idx) {
     game.selectedTowerType = -1;
@@ -917,39 +983,41 @@ function selectTower(idx) {
 }
 
 function upgradeTower() {
-  if (!game.selectedTower || game.selectedTower.level >= MAX_LEVEL) return;
+  if (!game || !game.selectedTower || game.selectedTower.level >= MAX_LEVEL) return;
   const cost = game.selectedTower.nextUpgradeCost;
   if (game.gold < cost) {
-    addFloatingText(game.selectedTower.x, game.selectedTower.y - 10, '金币不足!', '#ff6b6b');
+    addFloatingText(game.selectedTower.x, game.selectedTower.y - 10, '金币不足!', '#e53935');
     return;
   }
   game.gold -= cost;
   game.selectedTower.upgrade();
-  spawnParticles(game.selectedTower.x, game.selectedTower.y, '#ffd700', 12, 3, 25, 4);
-  addFloatingText(game.selectedTower.x, game.selectedTower.y - 20, '升级!', '#ffd700');
+  spawnParticles(game.selectedTower.x, game.selectedTower.y, '#fdd835', 14, 3, 25, 4);
+  addFloatingText(game.selectedTower.x, game.selectedTower.y - 25, '⬆️ 升级!', '#2e7d32');
+  game.placeAnims.push({ x: game.selectedTower.x, y: game.selectedTower.y, radius: 5, life: 25, maxLife: 25 });
   updateTowerUI();
 }
 
 function sellTower() {
-  if (!game.selectedTower) return;
+  if (!game || !game.selectedTower) return;
   const val = game.selectedTower.sellValue;
   game.gold += val;
-  addFloatingText(game.selectedTower.x, game.selectedTower.y - 10, `+${val}💰`, '#ffd700');
-  spawnParticles(game.selectedTower.x, game.selectedTower.y, '#ffa94d', 8, 3, 20, 4);
+  addFloatingText(game.selectedTower.x, game.selectedTower.y - 10, `+${val}💰`, '#2e7d32');
+  spawnParticles(game.selectedTower.x, game.selectedTower.y, '#ff8a65', 10, 3, 20, 4);
   game.towers = game.towers.filter(t => t !== game.selectedTower);
   game.selectedTower = null;
   updateTowerUI();
 }
 
 function toggleSpeed() {
+  if (!game) return;
   if (game.speed === 1) game.speed = 2;
   else if (game.speed === 2) game.speed = 3;
   else game.speed = 1;
-  document.getElementById('speed-btn').textContent = `⏩ ${game.speed}x`;
+  document.getElementById('speed-btn').textContent = `⏩${game.speed}x`;
 }
 
 function sendNextWave() {
-  if (game.waveInProgress || game.gameOver || game.wave >= TOTAL_WAVES) return;
+  if (!game || game.waveInProgress || game.gameOver || game.wave >= TOTAL_WAVES) return;
   game.wave++;
   game.waveInProgress = true;
   const waveData = generateWave(game.wave);
@@ -958,13 +1026,14 @@ function sendNextWave() {
   document.getElementById('start-btn').disabled = true;
 }
 
+/* ===== UI ===== */
+
 function updateTowerUI() {
   const info = document.getElementById('info-text');
   const upBtn = document.getElementById('upgrade-btn');
   const sellBtn = document.getElementById('sell-btn');
   document.querySelectorAll('.tower-btn').forEach((b, i) => {
-    const cost = TOWER_DEFS[i].cost;
-    b.classList.toggle('disabled', game.gold < cost && game.selectedTowerType !== i);
+    b.classList.toggle('disabled', game.gold < TOWER_DEFS[i].cost && game.selectedTowerType !== i);
   });
   if (game.selectedTower) {
     const t = game.selectedTower;
@@ -988,7 +1057,7 @@ function updateTowerUI() {
       const d = TOWER_DEFS[game.selectedTowerType];
       info.innerHTML = `<b>${d.name}</b> | 💰${d.cost} | 攻击:${d.damage} | 射程:${d.range}`;
     } else {
-      info.textContent = '选择塔放置，或点击已有塔查看';
+      info.textContent = '选择炮塔放置，或点击已有塔查看';
     }
   }
 }
@@ -996,7 +1065,7 @@ function updateTowerUI() {
 function updateUI() {
   document.getElementById('wave-text').textContent = `${game.wave} / ${TOTAL_WAVES}`;
   document.getElementById('gold-text').textContent = game.gold;
-  document.getElementById('hp-text').textContent = game.hp;
+  document.getElementById('hp-text').textContent = Math.max(0, game.hp);
   document.getElementById('score-text').textContent = game.score;
   if (!game.waveInProgress && game.wave < TOTAL_WAVES && !game.gameOver) {
     document.getElementById('start-btn').disabled = false;
@@ -1014,18 +1083,18 @@ function showOverlay(won) {
       <p>最终得分：${game.score}</p>
       <p>剩余金币：${game.gold}</p>
       <p>萝卜生命：${game.hp}</p>
-      <button class="big-btn" onclick="startGame()">再来一局</button>
-    `;
+      <button class="big-btn" onclick="startGame()">再来一局</button>`;
   } else {
     overlay.innerHTML = `
       <h1>😵 游戏结束</h1>
       <h2>萝卜被吃掉了！</h2>
       <p>坚持到了第 ${game.wave} 波</p>
       <p>最终得分：${game.score}</p>
-      <button class="big-btn" onclick="startGame()">重新开始</button>
-    `;
+      <button class="big-btn" onclick="startGame()">重新开始</button>`;
   }
 }
+
+/* ===== GAME LOOP ===== */
 
 function gameLoop(timestamp) {
   if (!game || !game.started) { requestAnimationFrame(gameLoop); return; }
@@ -1037,20 +1106,23 @@ function gameLoop(timestamp) {
   if (!game.gameOver) {
     game.gameTime += dt;
     const now = game.gameTime;
+    updateTowerAnims(dt);
     for (const t of game.towers) fireTower(t, now);
     updateEnemies(dt);
     updateProjectiles(dt);
-    updateSpawner(dt, now);
+    updateSpawner(dt);
     handleReachedEnd();
     checkWaveComplete();
     updateParticles(dt);
     updateFloatingTexts(dt);
+    updatePlaceAnims(dt);
     updateUI();
   }
 
   ctx.clearRect(0, 0, W, H);
   drawMap();
   drawPlacementPreview(mouseX, mouseY);
+  drawPlaceAnims();
   drawTowers();
   drawEnemies();
   drawProjectiles();
@@ -1058,28 +1130,17 @@ function gameLoop(timestamp) {
   drawFloatingTexts();
 
   game.projectiles = game.projectiles.filter(p => p.alive);
-
   requestAnimationFrame(gameLoop);
 }
 
-function startGame() {
-  game = newGameState();
-  game.started = true;
-  document.getElementById('overlay').classList.add('hidden');
-  document.getElementById('start-btn').disabled = false;
-  document.getElementById('speed-btn').textContent = '⏩ 1x';
-  document.querySelectorAll('.tower-btn').forEach(b => b.classList.remove('selected'));
-  generateDecorations();
-  updateUI();
-}
+/* ===== INIT ===== */
 
 const decorations = [];
 function generateDecorations() {
   decorations.length = 0;
-  const types = ['🌸','🌼','🍀','🌻','🪨','🌳','🌲'];
-  for (let i = 0; i < 25; i++) {
-    let col, row;
-    let attempts = 0;
+  const types = ['🌸','🌼','🍀','🌻','🌳','🌲','🪻'];
+  for (let i = 0; i < 30; i++) {
+    let col, row, attempts = 0;
     do {
       col = Math.floor(Math.random() * COLS);
       row = Math.floor(Math.random() * ROWS);
@@ -1089,6 +1150,17 @@ function generateDecorations() {
       decorations.push({ col, row, type: types[Math.floor(Math.random()*types.length)], offset: Math.random()*6-3 });
     }
   }
+}
+
+function startGame() {
+  game = newGameState();
+  game.started = true;
+  document.getElementById('overlay').classList.add('hidden');
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('speed-btn').textContent = '⏩1x';
+  document.querySelectorAll('.tower-btn').forEach(b => b.classList.remove('selected'));
+  generateDecorations();
+  updateUI();
 }
 
 document.addEventListener('keydown', e => {
@@ -1106,6 +1178,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'f' || e.key === 'F') toggleSpeed();
 });
 
+generateDecorations();
 requestAnimationFrame(gameLoop);
 </script>
 </body>
